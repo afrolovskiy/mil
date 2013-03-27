@@ -1,4 +1,6 @@
-CREATE DATABASE `medicines` CAHARACTER SET utf8;
+CREATE DATABASE `medicines` CHARACTER SET utf8;
+
+USE `medicines`
 
 CREATE TABLE `makers` (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -25,7 +27,9 @@ CREATE TABLE `pharmacies` (
 CREATE TABLE `medicines_makers` (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	medicine_id INT NOT NULL,
-	maker_id INT NOT NULL
+	maker_id INT NOT NULL,
+	CONSTRAINT FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`maker_id`) REFERENCES `makers` (`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `medicines_makers_pharmacies` (
@@ -34,5 +38,8 @@ CREATE TABLE `medicines_makers_pharmacies` (
 	maker_id INT NOT NULL,
 	pharmacy_id INT NOT NULL,
 	cost INT NOT NULL,
+	CONSTRAINT FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`maker_id`) REFERENCES `makers` (`id`) ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`id`) ON DELETE CASCADE
 );
 
