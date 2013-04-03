@@ -1,82 +1,55 @@
 #!/bin/bash
 
 check_user() {
-	user=`whoami`
-	echo $user
-	if [ $user != $template ]; then
+	if [ `whoami` != $1 ]; then
+		echo "Access denied"
 		exit
 	fi
 }
 
-recreate_dir() {
+recreate_cpdir() {
 	test -e $1 && rm -r $1
 	test -e $1 || mkdir $1
 }
 
-get_script_interpreter() {
-	str=`grep '^#!' $1`
-	interpreter=`expr match "$str" '.*/\(.*\)$'`
-}
-
-get_file_type() {
-	get_script_interpreter $1
-	if (( `expr length "$interpreter"` == 0 )); then
-		type=""
-	elif [ "$available_interpreters" != "${available_interpreters/\ $interpreter\ /}" ]; then
-	 	type=$interpreter
-	else
-		type=""
-	fi
-}
-
-get_files() {
-	fns=`find $1 -type f`
-}
-
-get_new_filename() {
-	name=`expr match "$1" '.*/\(.*\)$'`
+find_scripts() {
+	find $1 -type f -exec grep -H "^[\ ]*#\!" {} \; 2>/dev/null | sed "s/#![\ ]*/#!/g" | sed "s/\ .*$//g" > ~/temp
 }
 
 copy_scripts() {
-	get_files $1
-	for fn in $fns
+	for line in `cat ~/temp | tr -d ' '`
 	do
-		get_file_type $fn
-		if (( `expr length "$type"` != 0 )); then
-			get_new_filename $fn $type
-			cp $fn $2/${name}.${type}
+		file1=`echo $line | cut -d: -f1`
+		name=`expr match "$file1" '.*/\(.*\)$'`
+		ext=`expr match "$line" '.*/\(.*\)$'`
+		file2=$1/$name.$ext
+		cp $file1 $file2
+	done	
+}
+
+print_count() {
+	echo "Количества найденых скриптов:"
+	cat ~/temp | awk -F/ '{print $NF}' | sort | uniq -c > ~/temp2
+	cat ~/temp2
+}
+
+remove_selected_scripts() {
+	echo "Выберите расширение файлов для удаления или none для выходя"
+	types=`cat ~/temp2 | awk -F\  '{print $2}'`
+	select type in $types 'none'
+	do 	
+		if [ $type == 'none' ]; then
+			break
 		fi
+		rm $1/*.$type 2>/dev/null
 	done
 }
 
-print_type_counts() {
-	for ftype in $available_interpreters
-	do
-		count=`ls $1 | grep '\.'$ftype | wc -w`
-		echo "type:" $ftype "  count:" $count
-	done
-}
-
-remove_other_files() {
-	regexp="\.\("`echo "$2" | sed -r 's/[\ ]+/\\\|/g'`"\)$"
-	ls -d $1/* | grep -v $regexp | xargs rm
-}
-
-main() {
-	check_user
-	recreate_dir $cpdir
-	copy_scripts $dir $cpdir
-	print_type_counts $cpdir
-
-	echo "Введите, пожалуйста, расширения файлов, которые необходимо оставить, через пробел"
-	read available_exts
-
-	remove_other_files $cpdir "$available_exts"
-}
-
-template="student"
-dir=/bin
+dir=/usr/bin
 cpdir=~/bin
-available_interpreters=" perl bash sh python erl "
-main
-
+check_user "student"
+recreate_cpdir $cpdir
+find_scripts $dir
+copy_scripts $cpdir
+print_count
+remove_selected_scripts $cpdir
