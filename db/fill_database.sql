@@ -8,7 +8,7 @@ INSERT INTO `medicines` (id, name, is_recipe, route) VALUES(3, 'Валидол',
 
 INSERT INTO `medicines` (id, name, is_recipe, route) VALUES(4, 'Пенталгин-Н', 1, 'Внутрь, взрослым, по 1 таблетке 2-3 раза в сутки после еды. Детям старше 7 лет - половину дозы для взрослых. Длительность приема - 2-3 дня (до 1 нед).');
 
-INSERT INTO `medidines` (id, name, is_recipe, route) VALUES(5, 'Коделак', 1, 'Внутрь, по 1 таблетке 2-3 раза в день.
+INSERT INTO `medicines` (id, name, is_recipe, route) VALUES(5, 'Коделак', 1, 'Внутрь, по 1 таблетке 2-3 раза в день.
 ');
 
 INSERT INTO `medicines` (id, name, is_recipe, route) VALUES(6, 'Юниспаз', 1, 'При головной боли препарат рекомендуется применять внутрь по 1-2 таблеткам за один прием, при необходимости можно повторить прием через 8 ч. При коротком (не более 3 дней) курсе лечения максимальная суточная доза составляет 6 таблеток, при длительном курсе она не должна превышать 4 таблеток в день. Для достижения быстрого эффекта следует натощак. Дети: в возрасте 6-12 лет рекомендуется применять однократную дозу 0.5-1 таблетку, которая может быть назначена повторно через 10-12 ч, максимальная доза 2 таблетки в сутки. Пожилые больные: рекомендуется обычная доза для взрослых, если нет нарушения функции почек и печени. При тяжелом нарушении функции печени и почек доза должна быть снижена. При скорости клубочковой фильтрации менее 10 мл/мин время, проходящее между приемом 2 доз, должно быть более 12 ч. Допускается лишь эпизодическое применение препарата. Максимальная продолжительность лечения без консультации врача - 3 дня.');
@@ -40,7 +40,7 @@ INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(2, 2);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(3, 2);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(5, 2);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(6, 2);
-INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(7. 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(7, 2);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(1, 3);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(3, 3);
 INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(6, 3);
