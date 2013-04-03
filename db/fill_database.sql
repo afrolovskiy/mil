@@ -26,4 +26,45 @@ INSERT INTO `makers` (id, name, created_at, country) VALUES(3, 'Janssen-Cilag', 
 
 
 
-INSERT INTO `pharmacies` (id, name, address, start_at, end_at) VALUES (,,,,);
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (1, 'Атц-фарм', 'пер. Тверской-Ямской 1-й, 16, Москва, 125047', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (2, 'Медицина Для Вас', 'просп. Вернадского, 32, корп. 71, город Москва, 119454', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (3, 'Аптека 36\'6', 'ул. Валовая, Москва, 115054', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
+
+
+
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(1, 1);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(2, 1);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(4, 1);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(5, 1);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(2, 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(3, 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(5, 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(6, 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(7. 2);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(1, 3);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(3, 3);
+INSERT INTO `medicines_makers` (medicine_id, maker_id) VALUES(6, 3);
+
+
+
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(1, 1, 1, 30);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(1, 1, 2, 40);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(1, 1, 3, 35);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(2, 1, 1, 60);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(4, 1, 1, 120);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(4, 1, 3, 115);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(5, 1, 2, 170);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(2, 2, 2, 70);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(2, 2, 3, 65);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(3, 2, 1, 20);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(5, 2, 1, 175);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(5, 2, 3, 180);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(6, 2, 2, 150);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(7, 2, 2, 150);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(7, 2, 3, 155);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(1, 3, 1, 35);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(1, 3, 2, 40);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(3, 3, 3, 25);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(6, 3, 1, 160);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(6, 3, 2, 155);
+INSERT INTO `medicines_makers_pharmacies` (medicine_id, maker_id, pharmacy_id, cost) VALUES(6, 3, 3, 158);

@@ -20,8 +20,7 @@ CREATE TABLE `pharmacies` (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	address VARCHAR(255) NOT NULL,
-	start_at TIMESTAMP NOT NULL,
-	end_at TIMESTAMP NOT NULL
+	working_time VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `medicines_makers` (
