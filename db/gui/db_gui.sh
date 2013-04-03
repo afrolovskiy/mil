@@ -1,5 +1,15 @@
 #!/bin/bash
 
+MYSQL_HOST="192.168.222.182"
+MYSQL_USER="root"
+MYSQL_PASSWORD="123"
+
+mysql -h $MYSQL_HOST -u $MYSQL_USER -p"$MYSQL_PASSWORD" -sse "SELECT * FROM medicines" medicines | while read i
+do
+	echo $i
+done
+
+
 zenity --list \
        --title="Аптеки "\
        --text="Список аптек" \
