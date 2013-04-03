@@ -29,7 +29,7 @@ copy_scripts() {
 
 print_count() {
 	echo "Количества найденых скриптов:"
-	cat ~/temp | awk -F/ '{print $NF}' | sort | uniq -c > ~/temp2
+	cat ~/temp | egrep -o '#!.*$' |  sort | uniq -c > ~/temp2 #| egrep -o "\/.*"
 	cat ~/temp2
 }
 
@@ -50,6 +50,6 @@ cpdir=~/bin
 check_user "student"
 recreate_cpdir $cpdir
 find_scripts $dir
-copy_scripts $cpdir
+#copy_scripts $cpdir
 print_count
-remove_selected_scripts $cpdir
+#remove_selected_scripts $cpdir
