@@ -4,11 +4,12 @@ MYSQL_HOST="192.168.222.182"
 MYSQL_USER="root"
 MYSQL_PASSWORD="123"
 
-mysql -h $MYSQL_HOST -u $MYSQL_USER -p"$MYSQL_PASSWORD" -sse "SELECT * FROM medicines" medicines | while read i
+medicine_ids=`mysql -h $MYSQL_HOST -u $MYSQL_USER -p"$MYSQL_PASSWORD" -sse "SELECT id FROM medicines" medicines`
+echo $medicine_ids
+for id in $medicine_ids
 do
-	echo $i
+	echo $id
 done
-
 
 zenity --list \
        --title="Аптеки "\
