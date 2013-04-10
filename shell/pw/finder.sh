@@ -39,14 +39,14 @@ remove_selected_scripts() {
 	types=`cat ~/temp1 | sort | uniq`
 	select type in $types 'none'
 	do 	
-		if [ $type == 'none' ]; then
+		if [ "$type" == 'none' ]; then
 			break
 		fi
 		rm $1/*.$type 2>/dev/null
 	done
 }
 
-dir=/bin
+dir=/usr/bin
 cpdir=~/bin
 check_user "student"
 recreate_cpdir $cpdir
