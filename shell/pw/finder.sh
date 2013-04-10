@@ -7,14 +7,14 @@ check_user() {
 	fi
 }
 
-recreate_cpdir() {
+initialize() {
 	test -e $1 && rm -r $1
 	test -e $1 || mkdir $1
 	rm ~/temp1 2>/dev/null
 	rm ~/temp2 2>/dev/null
 }
 
-find_scripts() {
+process_files() {
 	for file in `find $1 -type f`
 	do
 		interpreter=`head -n 1 $file 2>/dev/null | egrep '^\ *#!' | sed 's/\ *#/#/g' | sed 's/#!\ *//g' | sed 's/\ .*$//g' | sed 's/.*\///g'`
@@ -49,7 +49,7 @@ remove_selected_scripts() {
 dir=/usr/bin
 cpdir=~/bin
 check_user "student"
-recreate_cpdir $cpdir
-find_scripts $dir $cpdir
+initialize $cpdir
+process_files $dir $cpdir
 print_count
 remove_selected_scripts $cpdir
