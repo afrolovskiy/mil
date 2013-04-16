@@ -1,0 +1,25 @@
+<html>
+    <h2>Проиводители</h2>
+    <table border=2>
+        <col width="2%">
+        <col width="15%">
+        <col width="35%">
+        <col width="30%">
+        <tr>
+            <td>id</td>
+            <td>Название</td>
+            <td>Дата основания</td>
+            <td>Страна</td>
+            <td>Производимые лекарства</td>
+        </tr>
+        {% for maker in makers %}
+        <tr>    
+            <td>{{ maker.id }}</td>
+            <td>{{ maker.name }}</td>
+            <td>{{ maker.created_at }}</td>
+            <td>{{ maker.country }}</td>
+            <td>Ссылка</td>
+        </tr>
+        {% endfor %}
+    </table>
+</html>
