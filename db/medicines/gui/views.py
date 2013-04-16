@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from .models import Medicine, Pharmacy, Maker, MakerMedicine
+from .models import Medicine, Pharmacy, Maker, MakerMedicine, PharmacyMakerMedicine
 
 
 class MedicinesView(TemplateView):
@@ -38,4 +38,13 @@ class MakerMedicinesView(TemplateView):
 	maker_id = kwargs.get('maker_id')
 	medicines = MakerMedicine.objects.filter(maker_id=maker_id).values_list('medicine_id')
         context['medicines'] = Medicine.objects.filter(id__in=medicines)
+        return context
+
+
+class PharmacyMakerMedicinesView(TemplateView):
+    template_name = "costs.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(PharmacyMakerMedicinesView, self).get_context_data(**kwargs)
+        context['medicines'] = PharmacyMakerMedicine.objects.all()
         return context

@@ -53,3 +53,14 @@ class MakerMedicine(models.Model):
 
     class Meta:
         db_table = 'medicines_makers'
+
+
+class PharmacyMakerMedicine(models.Model):
+    id = models.IntegerField(primary_key=True)
+    medicine = models.ForeignKey(Medicine)
+    maker = models.ForeignKey(Maker)
+    pharmacy = models.ForeignKey(Pharmacy)
+    cost = models.IntegerField()
+
+    class Meta:
+        db_table = 'medicines_makers_pharmacies'
