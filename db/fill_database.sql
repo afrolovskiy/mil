@@ -26,9 +26,9 @@ INSERT INTO `makers` (id, name, created_at, country) VALUES(3, 'Janssen-Cilag', 
 
 
 
-INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (1, 'Атц-фарм', 'пер. Тверской-Ямской 1-й, 16, Москва, 125047', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
-INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (2, 'Медицина Для Вас', 'просп. Вернадского, 32, корп. 71, город Москва, 119454', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
-INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (3, 'Аптека 36\'6', 'ул. Валовая, Москва, 115054', '((8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),(8.0,20.0),null,null)');
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (1, 'Атц-фарм', 'пер. Тверской-Ямской 1-й, 16, Москва, 125047', '[[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],null,null]');
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (2, 'Медицина Для Вас', 'просп. Вернадского, 32, корп. 71, город Москва, 119454', '[[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],null,null]');
+INSERT INTO `pharmacies` (id, name, address, working_time) VALUES (3, 'Аптека 36\'6', 'ул. Валовая, Москва, 115054', '[[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],[8.0,20.0],null,null]');
 
 
 
