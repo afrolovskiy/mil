@@ -4,6 +4,16 @@ import json
 from django.db import models
 
 
+class Maker(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField()
+    country = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'makers'
+
+
 class Medicine(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -26,15 +36,20 @@ class Pharmacy(models.Model):
     @property
     def working_time_str(self):
         week_days = [u'пн',  u'вт', u'ср', u'чт', u'пт', u'сб', u'вс']
-        working_time = json.loads(self.working_time)
-        days = zip(week_days, working_time)
+        days = zip(week_days, json.loads(self.working_time))
         result = u''
-        for idx in range(0, 7):
-            day = days[idx]
-            print day
+        for day in days:
             if day[1] is not None:
                 result += u'%s %s-%s ' % (day[0], day[1][0], day[1][1])
             else:
                 result += u'%s - вых ' % day[0]
-        print result
         return result
+
+
+class MakerMedicine(models.Model):
+    id = models.IntegerField(primary_key=True)
+    medicine = models.ForeignKey(Medicine)
+    maker = models.ForeignKey(Maker)
+
+    class Meta:
+        db_table = 'medicines_makers'
