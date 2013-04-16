@@ -1,0 +1,26 @@
+<html>
+    <h2>Лекарства</h2>
+    <table border=2>
+        <col width="2%">
+        <col width="10%">
+        <col width="5%">
+        <tr>
+            <td>id</td>
+            <td>Название</td>
+            <td>Рецепт</td>
+            <td>Способ применения</td>
+        </tr>
+        {% for medicine in medicines %}
+        <tr>    
+            <td>{{ medicine.id }}</td>
+            <td>{{ medicine.name }}</td>
+            {% if medicine.is_recipe %}
+            <td>Необходим</td>
+            {% else %}
+            <td>Нет</td>
+            {% endif %}
+            <td>{{ medicine.route }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</html>

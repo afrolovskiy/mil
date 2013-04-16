@@ -1,0 +1,24 @@
+<html>
+    <h2>Аптеки</h2>
+    <table border=2>
+        <col width="2%">
+        <col width="15%">
+        <col width="35%">
+        <tr>
+            <td>id</td>
+            <td>Название</td>
+            <td>Адрес</td>
+            <td>Часы работы</td>
+            <td>Ассортимент</td>
+        </tr>
+        {% for pharmacy in pharmacies %}
+        <tr>    
+            <td>{{ pharmacy.id }}</td>
+            <td>{{ pharmacy.name }}</td>
+            <td>{{ pharmacy.address }}</td>
+            <td>{{ pharmacy.working_time_str }}</td>
+            <td>Ссылка</td>
+        </tr>
+        {% endfor %}
+    </table>
+</html>
