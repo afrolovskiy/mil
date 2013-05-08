@@ -33,7 +33,6 @@ class Pharmacy(models.Model):
     class Meta:
         db_table = 'pharmacies'
 
-    @property
     def working_time_str(self):
         week_days = [u'пн',  u'вт', u'ср', u'чт', u'пт', u'сб', u'вс']
         days = zip(week_days, json.loads(self.working_time))
@@ -44,6 +43,8 @@ class Pharmacy(models.Model):
             else:
                 result += u'%s - вых ' % day[0]
         return result
+    working_time_str.allow_tags = True
+
 
 
 class MakerMedicine(models.Model):

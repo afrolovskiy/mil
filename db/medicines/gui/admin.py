@@ -8,7 +8,7 @@ class MedicineAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', )
 
 class PharmacyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', )
+    list_display = ('id', 'name', 'working_time_str')
 
 def maker(obj):
     return obj.maker.name
