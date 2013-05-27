@@ -26,8 +26,8 @@ function checkScopeAreaSector {
 	# $7       - угол обзора
 
 	# переходим к новой с/к
-	xr=`echo "$1 $3" | awk "{print $1-$2;}"`
-	yr=`echo "$2 $4" | awk "{print $1-$2;}"`
+	xr=`echo "$1 $3" | awk "{print ($1 - $2);}"`
+	yr=`echo "$2 $4" | awk "{print ($1 - $2);}"`
 
 	# переходим к полярной с/к
 	r=`echo "sqrt($xr*$xr + $yr*$yr)" | bc -l`
