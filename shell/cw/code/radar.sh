@@ -1,10 +1,21 @@
 #!/bin/bash
 
+
+DirectoryTargets="/tmp/GenTargets/Targets"
+
+DirectiryFindedTargets="/tmp/RLS$1"
+mkdir $DirectoryFindedTargets >/dev/null 2>/dev/null
+
 #RLSDirectory=/tmp/RLS$1
 #FindedTargetsFile=$RLSDirectory/targets.txt
 
-#Timeout=0.5
-#DirectoryTargets="$TempDirectory/Targets"
+Timeout=0.5
+objectX=9500000
+objectY=3000000
+objectR=4500000
+objectTeta=315
+objectAngle=48
+
 
 # получение идентификатора
 #echo $Filename | cut -d \. -f 3
@@ -21,19 +32,6 @@
 
 
 #ls -t $DirectoryTarget | grep Target.id.0cacf6 | head -n 1 # последний файл с таким id iником
-
-#xc=9500
-#echo "xc="$xc
-#yc=3000
-#echo "yc="$yc
-
-# Расчет попадания в зону видимости
-#xr=$(($x - $xc))
-#echo "xr="$xr
-#yr=$(($y-$yc))
-#echo "yr="$yr
-#r=`echo "sqrt($xr*$xr + $yr*$yr)" | bc -l`
-#echo $r
 
 function checkScopeAreaCircle {
 	# $1, $2 - координаты объекта
@@ -95,7 +93,7 @@ function checkScopeAreaSector {
 }
 
 
-tests() {
+testsCheckScopeArea() {
 
 	echo "tests for circle"
 
@@ -156,9 +154,75 @@ tests() {
 	checkScopeAreaSector $x $y $xc $yc $R $a $b
 }
 
-tests
+
+calculateSpeed() {
+	# $1, $2 - координаты предыдущего положения цели (засечке)
+	# $3       - время на предыдущей засечке
+	# $4, $5 - координаты текущего положения цели
+	# $6       - текущее время
+	speed=`echo "sqrt(($4 - $1)*($4 - $1) + ($5 - $2)*($5 - $2)) / ($6 - $3)" | bc -l`
+	echo "speed="$speed
+}
+
+testsCalculateSpeed() {
+	calculateSpeed 0 0 0 10 10 1
+}
+
+#testsCalculateSpeed
 
 
+defineTargetType() {
+	type=`echo "$1" | awk '{if ( $1 >=  50 && $1 < 250 ) print "plane"; else if ( $1 >= 250 && $1 < 1000 ) print "cruiser"; else if ( $1 >= 8000 && $1 < 10000 ) print "rocket"; else print "unknown";}'`
+	echo "type="$type
+}
+
+
+testsDefineTargetType() {
+	speed=100.5
+	defineTargetType $speed
+
+	speed=400.5
+	defineTargetType $speed
+
+	speed=9000.5
+	defineTargetType $speed
+}
+
+#testsDefineTargetType
+
+#tests
+
+detectTargets() {
+	for target in `ls -t "$DirectoryTargets" | cut -d \. -f 3 | sort | uniq`
+	do
+		lastFilename=`ls -t "$DirectoryTargets" | grep $filename | head -n 1`
+		
+		if [ -f "$DirectoryFindedTargets/"Target.id."$target" ];
+		then
+			x2=`cat "$DirectoryTargets/$lastFilename" | cut -d \  -f 1`
+			y2=`cat "$DirectoryTargets/$lastFilename" | cut -d \  -f 2`
+
+			checkScopeAreaSector $x2  $y2 $objectX $objectY $objectR $objectTeta $objectAngle
+			if (($isVisible == 1)); then
+				echo "alredy finded"
+				x1=`cat "$DirectoryFindedTargets/Target.id.$target" | cut -d \  -f 1`
+				y1=`cat "$DirectoryFindedTargets/Target.id.$target" | cut -d \  -f 2`
+				calculateSpeed $x1 $y1 0 $x2 $y2 $Timeout
+				defineTargetType $speed
+			fi
+		else
+			x1=`cat "$DirectoryFindedTargets/$lastFilename" | cut -d \  -f 1`
+			y1=`cat "$DirectoryFindedTargets/$lastFilename" | cut -d \  -f 2`
+			checkScopeAreaSector $x1  $y1 $objectX $objectY $objectR $objectTeta $objectAngle
+			if (($isVisible == 1)); then			
+				echo "new target"
+				cp "$DirectoryTargets/$lastFilename" "$DirectoryFindedTargets/Target.id.$target"
+			fi
+		fi		
+	done
+}
+
+detectTargets
 
 
 #while :  # бесконечный цикл
